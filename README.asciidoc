@@ -1,0 +1,16 @@
+ sdk use java 11.0.15-zulu
+
+./mvnw clean verify
+
+./mvnw spring-boot:run
+
+mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
+-Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:LATEST \
+-DactiveRecipes=org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0
+
+ sdk use java 17.0.3-zulu
+
+./mvnw clean verify
+
+./mvnw spring-boot:run
+

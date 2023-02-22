@@ -1,0 +1,84 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",":dependencyDashboard"
+  ],
+  baseBranches: [ "master","main","snapshot" ],
+  enabledManagers: [ "maven" ],
+  packageRules: [
+    // Whitelist all dependencies on release branches
+    {
+      enabled: true,
+      matchBaseBranches: ["main", "master"],
+      matchManagers: [ "maven" ],
+      matchPackagePatterns: [ "*" ],
+    },
+
+    // Blacklist all dependencies dependencies on release branches matching...
+    {
+      enabled: false,
+      matchBaseBranches: ["main", "master"],
+      matchManagers: [ "maven" ],
+      matchPackagePatterns: [
+        "com.xavierbouclet:.*-api",
+      ],
+    },
+
+    // Blacklist all snapshots dependencies on release branches
+    {
+      enabled: false,
+      matchBaseBranches: ["main", "master"],
+      groupName: "spring boot",
+      matchPackageNames: [
+        "org.springframework.boot"
+      ],
+      matchPackagePrefixes: [
+        "org.springframework.boot:"
+      ],
+      matchCurrentVersion: "/.*-SNAPSHOT$/",
+      matchManagers: [ "maven" ],
+    },
+    {
+      enabled: false,
+      matchBaseBranches: ["main", "master"],
+      groupName: "spring boot",
+      matchPackageNames: [
+        "org.springframework.boot"
+      ],
+      matchPackagePrefixes: [
+        "org.springframework.boot:"
+      ],
+      matchCurrentVersion: "/.*-RC*/",
+      matchManagers: [ "maven" ],
+    },
+    {
+      enabled: false,
+      groupName: "spring boot",
+      matchBaseBranches: ["main", "master"],
+      matchPackageNames: [
+        "org.springframework.boot"
+      ],
+      matchPackagePrefixes: [
+        "org.springframework.boot:"
+      ],
+      matchCurrentVersion: "/.*-M*/",
+      matchManagers: [ "maven" ],
+    },
+
+    {
+      enabled: true,
+      matchBaseBranches: ["snapshot"],
+      matchManagers: [ "maven" ],
+      groupName: "spring boot",
+      matchPackageNames: [
+        "org.springframework.boot"
+      ],
+      matchPackagePrefixes: [
+        "org.springframework.boot:"
+      ],
+      ignoreUnstable: false
+    }
+  ],
+  prCreation: "not-pending",
+  recreateClosed: true
+}
