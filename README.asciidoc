@@ -1,16 +1,44 @@
- sdk use java 11.0.15-zulu
+Set JDK 11.
 
+[source,bash]
+----
+sdk use java 11.0.15-zulu
+----
+
+Build the app.
+[source,bash]
+----
 ./mvnw clean verify
+----
 
+Run the app.
+[source,bash]
+----
 ./mvnw spring-boot:run
+----
 
+Let's migrate from Spring Boot 2.4.0 to 3.0.2.
+[source,bash]
+----
 mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
 -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-spring:LATEST \
 -DactiveRecipes=org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_0
+----
 
- sdk use java 17.0.3-zulu
+Switch to JDK 17.
+[source,bash]
+----
+sdk use java 17.0.3-zulu
+----
 
+Build the app.
+[source,bash]
+----
 ./mvnw clean verify
+----
 
+Run the app.
+[source,bash]
+----
 ./mvnw spring-boot:run
-
+----
